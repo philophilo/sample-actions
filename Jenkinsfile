@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage("build image") {
+        stage("Run tests") {
             steps {
                 echo "Starting...1"
                 sh 'make start'
