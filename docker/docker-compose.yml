@@ -1,0 +1,53 @@
+version: '2.4'
+
+services:
+  app:
+    restart: always
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    environment:
+      SECRET_KEY: $SECRET_KEY
+      DATABASE_USER: $DATABASE_USER
+      DATABASE_PASSWORD: DATABASE_PASSWORD
+      DATABASE_NAME: $DATABASE_NAME
+      DATABASE_HOST: $DATABASE_HOST
+      DATABASE_PORT: $DATABASE_PORT
+      EMAIL_HOST: $EMAIL_HOST
+      EMAIL_PORT: $EMAIL_PORT
+      EMAIL_HOST_USER: $EMAIL_HOST_USER
+      EMAIL_HOST_PASSWORD: $EMAIL_HOST_PASSWORD
+    ports:
+      - 8000:8000
+    volumes:
+      - ${PWD}:/app
+    stdin_open: true
+    tty: true
+    container_name: exp
+    networks:
+      - exp
+
+  database:
+    restart: always
+    image: postgres:10.1
+    environment:
+      POSTGRES_USER: $DATABASE_USER
+      POSTGRES_PASSWORD: DATABASE_PASSWORD
+      POSTGRES_DB: $DATABASE_NAME
+    volumes:
+      - exp_data:/var/lib/postgresql/data
+    container_name: exp_db
+    ports:
+      - 5433:5432
+    networks:
+      - exp
+
+volumes:
+  exp_data:
+    driver: local
+  exp_data:
+    driver: local
+
+networks:
+  exp:
+    driver: bridge
