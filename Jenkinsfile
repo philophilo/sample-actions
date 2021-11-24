@@ -6,7 +6,7 @@ pipeline{
                 echo "Starting...1"
                 sh 'make start'
                 echo "Run tests"
-                sh 'make tests'
+                sh 'make jenkins-tests'
             }
         }
     }
