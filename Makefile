@@ -60,4 +60,4 @@ tests:
 	@docker-compose -f $(DEV_COMPOSE_FILE) exec app /app/start_app.sh test
 
 jenkins-tests:
-	@docker-compose -f $(DEV_COMPOSE_FILE) exec app /app/start_app.sh test
+	@docker-compose -f $(DEV_COMPOSE_FILE) exec -T app /app/start_app.sh test
