@@ -9,7 +9,7 @@ services:
     environment:
       SECRET_KEY: $SECRET_KEY
       DATABASE_USER: $DATABASE_USER
-      DATABASE_PASSWORD: DATABASE_PASSWORD
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
       DATABASE_NAME: $DATABASE_NAME
       DATABASE_HOST: $DATABASE_HOST
       DATABASE_PORT: $DATABASE_PORT
@@ -32,7 +32,7 @@ services:
     image: postgres:10.1
     environment:
       POSTGRES_USER: $DATABASE_USER
-      POSTGRES_PASSWORD: DATABASE_PASSWORD
+      POSTGRES_PASSWORD: $DATABASE_PASSWORD
       POSTGRES_DB: $DATABASE_NAME
     volumes:
       - exp_data:/var/lib/postgresql/data
@@ -43,8 +43,6 @@ services:
       - exp
 
 volumes:
-  exp_data:
-    driver: local
   exp_data:
     driver: local
 
