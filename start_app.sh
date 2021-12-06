@@ -85,9 +85,17 @@ function django-shell {
     python manage.py shell -i ipython
 }
 
+function wait_for_database {
+    until $(nc -vz database 5432); do
+        info "Waiting for database"
+        sleep 5
+    done; echo "Database is ready..."
+}
+
 function run-tests {
     info "Running tests"
     cd /app/api
+    wait_for_database
     python manage.py test
 }
 
