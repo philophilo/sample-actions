@@ -24,6 +24,8 @@ services:
     stdin_open: true
     tty: true
     container_name: exp
+    depends_on:
+      - database
     networks:
       - exp
 
