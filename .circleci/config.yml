@@ -30,10 +30,9 @@ aws: &aws
 jobs:
   build:
     <<: *default
-
-      steps:
-        - checkout
-        - run:
-            command: |
-              pip install -r requirements.txt
-              make tests
+    steps:
+      - checkout
+      - run:
+          command: |
+            pip install -r requirements.txt
+            make tests
