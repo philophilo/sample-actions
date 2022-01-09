@@ -59,5 +59,11 @@ exp-shell:
 tests:
 	@docker-compose -f $(DEV_COMPOSE_FILE) exec app /app/start_app.sh test
 
-jenkins-tests:
+ci-tests:
 	@docker-compose -f $(DEV_COMPOSE_FILE) exec -T app /app/start_app.sh test
+
+build-ci:
+	@docker build -t philophilo/circleci-kube .circleci/
+
+push-ci:
+	@docker push philophilo/circleci-kube
