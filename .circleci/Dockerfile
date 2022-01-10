@@ -2,9 +2,12 @@ FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y apt-transport-https \
     ca-certificates \
-
-    curl && \
-    pip install awscli
+    build-essential \
+    libpq-dev \
+    python3-dev \
+    curl \
+    postgresql \
+    postgresql-contrib
 
 RUN curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
@@ -13,10 +16,4 @@ RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] htt
 RUN apt-get update && \
     apt-get install -y kubectl
 
-RUN apt-get install -y \
-        postgresql \
-        postgresql-contrib
-
-RUN apt-get install -y \
-        libpq-dev \
-        python3-dev
+RUN pip install awscli
