@@ -11,3 +11,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] htt
 
 RUN apt-get update && \
     apt-get install -y kubectl
+
+RUN apt-get install -y \
+        postgresql \
+        postgresql-contrib
