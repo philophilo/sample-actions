@@ -16,6 +16,13 @@ default: &default
         EMAIL_PORT: $EMAIL_PORT
         EMAIL_HOST_USER: $EMAIL_HOST_USER
         EMAIL_HOST_PASSWORD: $EMAIL_HOST_PASSWORD
+database: &database
+  docker:
+    - image: circleci/postgres:9.6.5-alpine-ram
+      environment:
+        POSTGRES_USER: $DATABASE_USER
+        POSTGRES_DB: $DATABASE_NAME
+        POSTGRES_PASSWORD: $DATABASE_PASSWORD
 
 aws: &aws
   run:
@@ -30,6 +37,7 @@ aws: &aws
 jobs:
   build:
     <<: *default
+    <<: *database
     steps:
       - checkout
       - run:
