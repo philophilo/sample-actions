@@ -2,6 +2,7 @@ FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y apt-transport-https \
     ca-certificates \
+
     curl && \
     pip install awscli
 
@@ -15,3 +16,7 @@ RUN apt-get update && \
 RUN apt-get install -y \
         postgresql \
         postgresql-contrib
+
+RUN apt-get install -y \
+        libpq-dev \
+        python3-dev
