@@ -2,6 +2,7 @@
 
 The application is written in Python and Django as the framework. It provides an api that captures expenses, income and provides statistics for both. The application can be run locally for development and deployments to production are handled through Circleci. The application runs in an EKS cluster for public access. See [infrastructure repo](https://github.com/philophilo/fire_k8s).
 
+<img width="1658" alt="Screenshot 2022-01-29 at 02 25 07" src="https://user-images.githubusercontent.com/12629658/151635049-732255ef-f2be-432a-b4a8-f38eb31aa654.png">
 
 ### Requirements
 ```
