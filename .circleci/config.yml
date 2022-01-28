@@ -44,10 +44,10 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
-            docker build -f docker/Dockerfile-prod -t philophilo/test .
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)
-            NEW_IMAGE=philophilo/test-$VERSION
+            NEW_IMAGE=philophilo/test:$VERSION
+            docker build -f docker/Dockerfile-prod -t $NEW_IMAGE .
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker push $NEW_IMAGE
             curl -X DELETE https://circleci.com/api/v1.1/project/gh/philophilo/fire_k8s/envvar/BACKEND_IMAGE -H "Circle-Token: $CIRCLECI_TOKEN"
             curl -X POST --header "Content-Type: application/json" -d '{"name":"BACKEND_IMAGE", "value":"$NEW_IMAGE"}' https://circleci.com/api/v1.1/project/gh/philophilo/fire_k8s/envvar -H "Circle-Token: $CIRCLECI_TOKEN"
