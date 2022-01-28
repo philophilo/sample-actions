@@ -2,7 +2,7 @@ version: 2.1
 default: &default
   working_directory: /app
   docker:
-    - image: philophilo/circleci-kube
+    - image: philophilo/circleci-kube-app
       auth:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
@@ -22,18 +22,8 @@ default: &default
         POSTGRES_DB: $DATABASE_NAME
         POSTGRES_PASSWORD: $DATABASE_PASSWORD
 
-aws: &aws
-  run:
-    command: |
-      mkdir -p ~/.aws
-      echo "[default]" > ~/.aws/credentials
-      echo "aws_access_key_id = ${AWS_SECRET_KEY}" >> ~/.aws/credentials
-      echo "aws_secret_access_key = ${AWS_ACCESS_KEY}" >> ~/.aws/credentials
-      echo "[default]" >> ~/.aws/config
-      echo "region =${REGION}" >> ~/.aws/config
-
 jobs:
-  build:
+  test:
     <<: *default
     steps:
       - checkout
@@ -42,3 +32,12 @@ jobs:
             pip install -r requirements.txt
             cd api/
             python manage.py test
+  deploy:
+    <<: *default:
+    steps:
+      - checkout
+      - run:
+          command: |
+            docker build -f docker/Dockerfile-prod -t philophilo/test .
+            docker push philophilo/test
+            curl -u $CIRCLECI_TOKEN: -X POST https://circleci.com/api/v2/project/gh/philophilo/fire_k8s/pipeline
