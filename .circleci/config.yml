@@ -34,18 +34,16 @@ jobs:
   deploy:
     working_directory: /app
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: philophilo/circleci-fire
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
 
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           command: |
-            apk add --no-cache py-pip=9.0.0-r1
-            apk --no-cache add curl
-            pip install wget
             docker build -f docker/Dockerfile-prod -t philophilo/test .
             docker push philophilo/test
             curl -u $CIRCLECI_TOKEN: -X POST https://circleci.com/api/v2/project/gh/philophilo/fire_k8s/pipeline
