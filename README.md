@@ -36,6 +36,12 @@ EMAIL_HOST_PASSWORD=
 ```
 The application uses Postgres as the database. This is also setup through Docker. The variables in `docker/.env` will be picked up by docker-compose on setup.
 
+### Running the application
+
+When the credentials have been setup, run `make run-app`. The application will be running on `localhost:8000`
+
+### The necessary Make commands
+
 `make network` Creates the docker-compose network
 
 `make build` Builds the application's image through docker-compose
