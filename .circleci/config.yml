@@ -4,7 +4,7 @@ jobs:
   test:
     working_directory: /app
     docker:
-      - image: philophilo/circleci-kube
+      - image: philophilo/circleci-fire
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -34,7 +34,7 @@ jobs:
   deploy:
     working_directory: /app
     docker:
-      - image: philophilo/circleci-kube
+      - image: philophilo/circleci-fire
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
