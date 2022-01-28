@@ -1,0 +1,21 @@
+FROM python:3.9
+
+WORKDIR /app
+
+RUN apt-get update -u && apt-get install -y \
+        supervisor \
+        netcat
+
+RUN supervisord
+
+COPY requirements.txt .
+
+COPY api api
+
+COPY prod_script.sh .
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD [ "/bin/bash", "-c","./prod_script.sh" ]
