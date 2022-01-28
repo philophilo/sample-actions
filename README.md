@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/philophilo/fire_app.svg?style=shield)](https://app.circleci.com/pipelines/github/philophilo/fire_app?filter=all)
+
 # Introduction
 
 The application is written in Python and Django as the framework. It provides an api that captures expenses, income and provides statistics for both. The application can be run locally for development and deployments to production are handled through Circleci. The application runs in an EKS cluster for public access. See [infrastructure repo](https://github.com/philophilo/fire_k8s).
