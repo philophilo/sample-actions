@@ -50,7 +50,7 @@ jobs:
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker push $NEW_IMAGE
             curl -X DELETE https://circleci.com/api/v1.1/project/gh/philophilo/fire_k8s/envvar/BACKEND_IMAGE -H "Circle-Token: $CIRCLECI_TOKEN"
-            curl -X POST --header "Content-Type: application/json" -d '{"name":"BACKEND_IMAGE", "value":"$NEW_IMAGE"}' https://circleci.com/api/v1.1/project/gh/philophilo/fire_k8s/envvar -H "Circle-Token: $CIRCLECI_TOKEN"
+            curl -X POST --header "Content-Type: application/json" -d '{"name":"BACKEND_IMAGE", "value":'$NEW_IMAGE'}' https://circleci.com/api/v1.1/project/gh/philophilo/fire_k8s/envvar -H "Circle-Token: $CIRCLECI_TOKEN"
             curl -u $CIRCLECI_TOKEN: -X POST https://circleci.com/api/v2/project/gh/philophilo/fire_k8s/pipeline
 
 workflows:
