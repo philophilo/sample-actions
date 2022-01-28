@@ -11,11 +11,7 @@ up:
 	@echo "Running docker-compose up"
 	@docker-compose -f $(DEV_COMPOSE_FILE) up -d
 
-start: up
-	@echo "Start app..."
-	@docker-compose -f $(DEV_COMPOSE_FILE) start app
-
-run-app:
+run-app: up
 	@echo "Running app..."
 	@docker-compose -f $(DEV_COMPOSE_FILE) exec app /app/start_app.sh start
 
@@ -59,11 +55,8 @@ exp-shell:
 tests:
 	@docker-compose -f $(DEV_COMPOSE_FILE) exec app /app/start_app.sh test
 
-ci-tests:
-	@docker-compose -f $(DEV_COMPOSE_FILE) exec -T app /app/start_app.sh test
-
 build-ci:
-	@docker build -t philophilo/circleci-kube .circleci/
+	@docker build -t philophilo/circleci-fire .circleci/
 
 push-ci:
-	@docker push philophilo/circleci-kube
+	@docker push philophilo/circleci-fire
