@@ -14,6 +14,7 @@ The application is written in Python and Django as the framework. It provides an
 - SMTP Server (Gmail recommended)
 ```
 [How to setup Gmail SMTP server](https://kinsta.com/blog/gmail-smtp-server/)
+
 ### Setup
 Clone the repository and create `.env` file in the docker directory and add the following creadentials
 
@@ -72,9 +73,16 @@ When the credentials have been setup, run `make run-app`. The application will b
 
 `make tests` Runs Django tests
 
-`make build-ci` Builds the Docker image used to run tests and Circleci
+`make build-ci` Builds the Docker image used to run tests in Circleci
 
 `make push-ci` Pushes the Circleci to Docker hub
 
 ### Continuous Integration (CI)
 The application uses CircleCi for tests and deployments. Other branches can run tests but the deployment is reserved as master branch. The deployment step [triggers](https://github.com/philophilo/fire_app/blob/master/.circleci/config.yml#L47-L54) the pipeline in the [infrastructure repo](https://github.com/philophilo/fire_k8s). The image is also tagged with a new version and pushed to Docker hub. The newest image tags is added as an environment variable to the infrastructure pipeline.
+The pipeline requires a Circleci token used as `$CIRCLECI_TOKEN` to make api calls to the infrastucture pipeline. In Addition `$DOCKER_USERNAME` and `$DOCKER_PASSWORD` to authenticate docker to push the new image.
+
+```
+$CIRCLECI_TOKEN
+$DOCKER_USERNAME
+$DOCKER_PASSWORD
+```
