@@ -4,8 +4,17 @@ on:
       - master
       - 'feature/**'
   pull_request:
-    branches:
-      - master
     branches-ignore:
       - 'feature/**'
+
+jobs:
+  checkout:
+    name: Build image
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the repo
+        uses: actions/checkout@v3
+      - name: list dir
+        run: ls -l
+
 
